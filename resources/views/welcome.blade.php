@@ -46,23 +46,23 @@
                 },
                 body: JSON.stringify(data),
             })
-            .then((res) => {
-                return res.json();
-            })
-            .then(data => {
-                console.log(data);
-                if (data.access_token) {
-                    localStorage.setItem('token', data.access_token);
-                    window.location.href = '/dashboard';
-                } else {
-                    document.getElementById('message').innerText = data.message;
-                    document.getElementById('message').style.color = 'red';
-                }
-            })
-            .catch(error => {
-                console.error("Something went wrong with your fetch!", error);
+                .then((res) => {
+                    return res.json();
+                })
+                .then(data => {
+                    console.log(data);
+                    if (data.access_token) {
+                        localStorage.setItem('token', data.access_token);
+                        window.location.href = '/dashboard';
+                    } else {
+                        document.getElementById('message').innerText = data.message;
+                        document.getElementById('message').style.color = 'red';
+                    }
+                })
+                .catch(error => {
+                    console.error("Something went wrong with your fetch!", error);
+                });
             });
-        });
-    </script>
-</body>
-</html>
+        </script>
+    </body>
+    </html>

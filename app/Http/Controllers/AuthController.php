@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\User;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 
@@ -22,8 +23,13 @@ class AuthController extends Controller
             return response()->json([
                 'status' => false,
                 'message' => 'Invalid Credentials',
-            ], 401);
+            ], 401);        
         }
+    }
+
+    public function users()
+    {
+        return User::limit(10)->orderBy('id', 'desc')->get();
     }
     
 }
