@@ -41,8 +41,8 @@
                     <tr>
                         <td>1</td>
                         <td>Admin</td>
-                        <td>John Doe</td>
-                        <td>john@example.com</td>
+                        <td>Jay Alvin Melgazo</td>
+                        <td>ja.melgazo@mlgcl.edu.ph</td>
                     </tr>
                     <!-- Add more rows as needed -->
                 </tbody>

@@ -16,15 +16,15 @@ body {
     padding: 20px;
     display: flex;
     flex-direction: column;
-    justify-content: flex-start; /* Align items at the top */
-    align-items: center; /* Center horizontally */
-    overflow-y: auto; /* Add vertical scrollbar if content overflows */
+    justify-content: flex-start; 
+    align-items: flex-start;
+    overflow-y: auto; 
 }
 
 .sidebar h1 {
     font-size: 24px;
     margin: 0;
-    margin-bottom: 20px; /* Increase margin-bottom for more space */
+    margin-bottom: 90px; 
     text-align: center;
 }
 
@@ -32,11 +32,12 @@ body {
     list-style-type: none;
     padding: 0;
     margin: 0;
+    text-align: left;
 }
 
 .nav-links li {
-    margin-top: 10px; /* Increase margin-top for more space */
-    text-align: center;
+    margin-top: 10px; 
+ 
 }
 
 .nav-links li a {
@@ -44,12 +45,13 @@ body {
     color: #fff;
     font-size: 18px;
     display: block;
-    padding: 10px; /* Increase padding for more space */
+    padding: 10px; 
 }
 
 .content {
     flex: 1;
     padding: 20px;
+    text-align: left;
 }
 
 table {
