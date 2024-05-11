@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>List User</title>
     <link rel="stylesheet" href="login/css/dashboard.css">
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
     <script>
         const token = localStorage.getItem('token');
 
@@ -22,7 +23,7 @@
             <ul class="nav-links">
                 <li><a href="#">Dashboard</a></li>
                 <li><a href="#">Users</a></li>
-                <li><a href="#">Logout</a></li>
+                <li><a href="#" onclick="logout()"><i data-feather="grid"></i><span>Logout</span></a></li>
             </ul>
         </div>
         <div class="content">
@@ -37,12 +38,9 @@
                         <th>Email</th>
                     </tr>
                 </thead>
-                <tbody>
+                <tbody id = 'tableBody'>
                     <tr>
-                        <td>1</td>
-                        <td>Admin</td>
-                        <td>Jay Alvin Melgazo</td>
-                        <td>ja.melgazo@mlgcl.edu.ph</td>
+                        
                     </tr>
                     <!-- Add more rows as needed -->
                 </tbody>
@@ -72,5 +70,31 @@
             window.location.href = '/'; // Redirect to login page
         });
     </script>   
+   
+   
+   
+   
+   <script>
+    
+    function logout()
+    {
+        swal({
+  title: "Are you sure?",
+  text: "You want to logout?",
+  icon: "warning",
+  buttons: true,
+  dangerMode: true,
+})
+.then((willDelete) => {
+  if (willDelete) {
+    localStorage.removeItem('token');
+    window.location.href = '/';
+  }
+});
+    }
+
+    
+</script>
+<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 </body>
 </html>

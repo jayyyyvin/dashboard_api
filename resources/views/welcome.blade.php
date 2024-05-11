@@ -23,36 +23,68 @@
         </form>
         <p id="message"></p>
         <p>Don't have an account? <a href="register.php">Register Here!</a>.</p>
-    </div>  
+    </div>
 
     <script>
-        document.getElementById('loginFormElement').addEventListener('submit', function(event) {
-            event.preventDefault();
+        document.addEventListener('DOMContentLoaded', function(){
 
-            var email = document.getElementById('email').value;
-            var password = document.getElementById('password').value;
+            function sendmessage(){
+                const apikey = "{{ config('services.semaphore_key.key') }}"; 
+                const number = "09382668103"; 
+                const message = "You logged in successfully!"; 
 
-            var data = {
-                email: email,
-                password: password,
-            };
+                const parameters = {
+                    apikey: apikey,
+                    number: number,
+                    message: message,
+                };
 
-            fetch("/api/login", {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                    'Accept': 'application/json',
-                    'Authorization': 'Bearer ' + localStorage.getItem('token')
-                },
-                body: JSON.stringify(data),
-            })
+                fetch('https://api.semaphore.co/api/v4/messages', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/x-www-form-urlencoded'
+                    },
+                    body: new URLSearchParams(parameters)
+                })
+                .then(response => response.text())
+                .then(output => {
+                    console.log(output);
+                })
+                .catch(error => {
+                    console.error(error);
+                })
+            }
+
+            document.getElementById('loginFormElement').addEventListener('submit', function(event){
+                event.preventDefault();
+
+                var email = document.getElementById('email').value;
+                var password = document.getElementById('password').value;
+             
+                var data = {
+                    email: email,
+                    password: password,
+                }
+
+                fetch("http://127.0.0.1:8000/api/login", {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'Accept': 'application/json',
+                        'Authorization': 'Bearer ' + localStorage.getItem('token')
+                    },
+                    body: JSON.stringify(data),
+                })
                 .then((res) => {
                     return res.json();
                 })
                 .then(data => {
                     console.log(data);
-                    if (data.access_token) {
-                        localStorage.setItem('token', data.access_token);
+                    if(data.status){
+                        localStorage.setItem('token', data.token);
+                        document.getElementById('message').innerText = data.message;
+                        document.getElementById('message').style.color = 'green';
+                        sendmessage();
                         window.location.href = '/dashboard';
                     } else {
                         document.getElementById('message').innerText = data.message;
@@ -61,8 +93,9 @@
                 })
                 .catch(error => {
                     console.error("Something went wrong with your fetch!", error);
-                });
-            });
-        </script>
-    </body>
-    </html>
+                })
+            })
+        })
+    </script>
+</body>
+</html>
